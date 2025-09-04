@@ -164,6 +164,11 @@ export default function App() {
       addLog('info', 'بررسی وضعیت مدل‌ها به پایان رسید.');
   }, [addLog]);
   
+  // Automatically check model status on initial component mount
+  useEffect(() => {
+    handleCheckModels();
+  }, [handleCheckModels]);
+  
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   const handleTranslate = useCallback(async () => {
@@ -429,7 +434,7 @@ export default function App() {
                   </div>
                   <div className="flex flex-col gap-6">
                     <SettingsCard icon={<ChipIcon className="w-6 h-6 text-teal-500" />} title="تنظیمات مدل">
-                      <ModelManager isChecking={isCheckingModels} onCheck={handleCheckModels} statuses={modelStatuses} allModels={ALL_MODELS} selectedModel={selectedModel} setSelectedModel={setSelectedModel} disabled={UIElementsDisabled} />
+                      <ModelManager isChecking={isCheckingModels} statuses={modelStatuses} allModels={ALL_MODELS} selectedModel={selectedModel} setSelectedModel={setSelectedModel} disabled={UIElementsDisabled} />
                       <hr className="border-gray-300 dark:border-gray-600 my-6" />
                       <div className="space-y-6">
                         <TemperatureSlider temperature={temperature} setTemperature={setTemperature} disabled={UIElementsDisabled} />
